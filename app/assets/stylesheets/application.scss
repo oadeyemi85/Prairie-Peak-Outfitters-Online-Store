@@ -1,0 +1,247 @@
+// Variables (overriding Bootstrap defaults must come before the import)
+$peak-green: #2d5a3d;
+$peak-dark: #1d3b28;
+$peak-sand: #f4efe6;
+$peak-accent: #d9822b;
+$card-radius: 0.75rem;
+$gutter: 1rem;
+
+$primary: $peak-green;
+$warning: $peak-accent;
+$body-bg: $peak-sand;
+$font-family-sans-serif: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+$link-color: $peak-green;
+
+@import "bootstrap";
+
+// Mixin
+@mixin soft-shadow($alpha: 0.1) {
+  box-shadow: 0 2px ($gutter / 2) rgba(0, 0, 0, $alpha);
+}
+
+// Inheritance
+%surface {
+  background: #fff;
+  border-radius: $card-radius;
+  @include soft-shadow;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  main { flex: 1; }
+}
+
+.navbar-peak {
+  background: $peak-dark;
+
+  .navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .navbar-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-link, .navbar-brand { color: #fff; }
+
+  .nav-link:hover { color: $peak-accent; }
+
+  .navbar-content {
+    width: 100%;
+  }
+
+  .navbar-primary-nav,
+  .navbar-account-nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .navbar-primary-nav .nav-link,
+  .navbar-account-nav .nav-link {
+    white-space: nowrap;
+  }
+
+  .navbar-account-nav {
+    margin-left: auto;
+  }
+
+  .navbar-search {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .navbar-search .form-control {
+    flex: 1 1 8rem;
+    min-width: 7rem;
+  }
+
+  .navbar-search .form-select {
+    flex: 1 1 10rem;
+    min-width: 8rem;
+  }
+
+  .navbar-search .btn {
+    flex: 0 0 auto;
+  }
+
+  .navbar-account-nav .nav-item,
+  .navbar-account-nav .nav-link,
+  .navbar-account-nav form {
+    flex: 0 0 auto;
+  }
+
+  .navbar-account-nav form {
+    margin: 0;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .navbar-peak {
+    .navbar-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem 0.75rem;
+    }
+
+    .navbar-primary-nav {
+      flex: 1 0 100%;
+    }
+
+    .navbar-search {
+      flex: 1 1 20rem;
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .navbar-peak {
+    .navbar-content {
+      padding-top: 0.5rem;
+    }
+
+    .navbar-primary-nav,
+    .navbar-account-nav {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .navbar-search {
+      margin: 0.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .navbar-account-nav {
+      margin-left: 0;
+    }
+
+    .navbar-account-nav .nav-link {
+      padding-left: 0;
+    }
+  }
+}
+
+.hero {
+  @extend %surface;
+  background: linear-gradient($peak-green, $peak-dark);
+  color: #fff;
+  padding: $gutter * 3;
+
+  h1 { font-weight: 700; }
+}
+
+.product-card {
+  @extend %surface;
+  background: #fffdfa;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  > a {
+    display: block;
+    overflow: hidden;
+    background: #eeece4;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    @include soft-shadow(0.14);
+  }
+
+  &:hover .card-img-top,
+  &:focus-within .card-img-top { transform: scale(1.04); }
+
+  .card-img-top, .placeholder-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-img-top { display: block; transition: transform 0.35s ease; }
+
+  .price-old { text-decoration: line-through; color: $gray-600; margin-right: $gutter / 2; }
+
+  .price-sale { color: $peak-dark; font-weight: 700; }
+}
+
+.placeholder-img {
+  background: #dfe6dc;
+  color: $gray-600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel {
+  @extend %surface;
+  padding: $gutter * 1.5;
+}
+
+.product-detail-img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  max-height: 420px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: #eeece4;
+  border-radius: $card-radius;
+  padding: clamp(0.5rem, 2vw, 1rem);
+  margin-inline: auto;
+}
+
+@media (max-height: 560px) {
+  .product-detail-img { max-height: 80vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card, .product-card .card-img-top {
+    transition: none;
+  }
+}
+
+.breadcrumb { background: transparent; margin-bottom: $gutter; }
+
+footer.site-footer {
+  background: $peak-dark;
+  color: #fff;
+  margin-top: $gutter * 3;
+  padding: $gutter * 1.5 0;
+
+  a { color: $peak-accent; }
+}
+
+@include media-breakpoint-down(md) {
+  .hero { padding: $gutter * 1.5; }
+}
