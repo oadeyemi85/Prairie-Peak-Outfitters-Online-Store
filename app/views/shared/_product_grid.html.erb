@@ -1,0 +1,9 @@
+<% if products.any? %>
+  <div class="row row-cols-2 row-cols-md-3 g-3">
+    <% products.each do |product| %>
+      <div class="col"><%= render "shared/product_card", product: product %></div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="panel">No products found.</p>
+<% end %>
