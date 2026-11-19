@@ -1,0 +1,6 @@
+<% content_for :title, "Order ##{@order.id}" %>
+<div class="panel">
+  <h1 class="h3">Order #<%= @order.id %> <span class="badge text-bg-secondary"><%= @order.status.titleize %></span></h1>
+  <%= render "shared/invoice", order: @order %>
+  <p>Ships to: <%= @order.shipping_name %>, <%= @order.shipping_address %>, <%= @order.shipping_city %> <%= @order.shipping_postal_code %></p>
+</div>

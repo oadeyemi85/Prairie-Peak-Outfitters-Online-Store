@@ -1,0 +1,9 @@
+/log/*
+/tmp/*
+/storage/*
+/public/assets
+/node_modules
+.env
+*.log
+!/log/.keep
+!/tmp/.keep
