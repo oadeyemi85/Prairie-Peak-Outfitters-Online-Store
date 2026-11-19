@@ -1,0 +1,20 @@
+<% content_for :title, "Checkout" %>
+<h1 class="h3">Checkout</h1>
+<div class="row g-4">
+  <div class="col-md-8 panel">
+    <h2 class="h5">Invoice</h2>
+    <p class="text-muted">Taxes for <%= @order.province.name %>: <%= @order.province.tax_label %></p>
+    <%= render "shared/invoice", order: @order %>
+  </div>
+  <div class="col-md-4 panel">
+    <h2 class="h5">Ship to</h2>
+    <address>
+      <%= @order.shipping_name %><br>
+      <%= @order.shipping_address %><br>
+      <%= @order.shipping_city %>, <%= @order.province.code %> <%= @order.shipping_postal_code %>
+    </address>
+    <%= link_to "Change address", edit_account_path, class: "btn btn-sm btn-outline-secondary mb-3" %>
+    <%= button_to "Pay with card", checkout_path, method: :post, class: "btn btn-primary w-100", form: { data: { testid: "pay" } } %>
+    <p class="small text-muted mt-2">Secure payment handled by Stripe (test mode).</p>
+  </div>
+</div>
