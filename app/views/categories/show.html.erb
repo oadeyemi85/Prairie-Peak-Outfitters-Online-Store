@@ -1,0 +1,5 @@
+<% content_for :title, @category.name %>
+<h1 class="h3"><%= @category.name %></h1>
+<p><%= @category.description %></p>
+<%= render "shared/product_grid", products: @products %>
+<div class="mt-4"><%= paginate @products %></div>
