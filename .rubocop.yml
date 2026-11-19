@@ -1,0 +1,58 @@
+plugins: rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1
+  Exclude:
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+
+Style/Documentation:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Layout/LineLength:
+  Max: 140
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    - "db/migrate/**/*"
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - "db/migrate/**/*"
+Metrics/BlockLength:
+  Exclude:
+    - "app/admin/**/*"
+    - "config/**/*"
+    - "db/**/*"
+    - "test/**/*"
+Metrics/ClassLength:
+  Max: 150
+Metrics/CyclomaticComplexity:
+  Max: 12
+Metrics/PerceivedComplexity:
+  Max: 12
+Rails/OutputSafety:
+  Enabled: false
+# Database indexes for these validations are defined in migrations.
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - "app/models/category.rb"
+    - "app/models/province.rb"
+Rails/CreateTableWithTimestamps:
+  Exclude:
+    - "db/migrate/20261101000002_create_active_storage_tables.rb"
+Rails/SkipsModelValidations:
+  Enabled: false
+Rails/I18nLocaleTexts:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Naming/VariableNumber:
+  Enabled: false
+Lint/MissingSuper:
+  Enabled: false

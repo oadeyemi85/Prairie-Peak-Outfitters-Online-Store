@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  web:
+    build: .
+    restart: unless-stopped   # container restarts automatically after a server reboot
+    depends_on: [db]
+    ports: ["3000:3000"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/prairie_peak_production
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE in .env}
+      SEED_ON_BOOT: "true"
+    volumes:
+      - storage:/app/storage
+volumes:
+  pgdata:
+  storage:
