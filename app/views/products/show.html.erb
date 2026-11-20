@@ -1,25 +1,26 @@
 <% content_for :title, @product.name %>
-<div class="row g-4">
+<div class="row g-4 product-detail">
   <div class="col-md-5"><%= product_image(@product, :large, class: "product-detail-img") %></div>
-  <div class="col-md-7 panel">
-    <h1 class="h3"><%= @product.name %></h1>
-    <p class="text-muted mb-1">SKU <%= @product.sku %></p>
-    <p class="fs-4">
+  <div class="col-md-7 panel product-detail-content">
+    <p class="product-detail-eyebrow">Prairie Peak Outfitters</p>
+    <h1 class="product-detail-title"><%= @product.name %></h1>
+    <p class="text-muted mb-2">SKU <%= @product.sku %></p>
+    <p class="product-detail-price">
       <% if @product.on_sale? %>
         <span class="text-decoration-line-through text-muted"><%= money(@product.price) %></span>
-        <strong class="text-warning"><%= money(@product.sale_price) %></strong>
+        <strong class="product-detail-sale"><%= money(@product.sale_price) %></strong>
       <% else %>
         <strong><%= money(@product.price) %></strong>
       <% end %>
     </p>
-    <p><%= @product.description %></p>
+    <p class="product-detail-description"><%= @product.description %></p>
     <p>
       <% @product.categories.each do |category| %>
         <%= link_to category.name, category_path(category), class: "badge text-bg-secondary text-decoration-none" %>
       <% end %>
     </p>
     <% if @product.in_stock? %>
-      <p><%= @product.stock_quantity %> in stock</p>
+      <p class="product-detail-stock"><%= @product.stock_quantity %> in stock</p>
       <%= form_with url: cart_items_path, method: :post, class: "row g-2 align-items-center" do |f| %>
         <%= f.hidden_field :product_id, value: @product.id %>
         <div class="col-auto"><%= f.number_field :quantity, value: 1, min: 1, max: @product.stock_quantity, class: "form-control", "aria-label": "Quantity" %></div>
