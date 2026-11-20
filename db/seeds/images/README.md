@@ -1,8 +1,9 @@
 # Seed product photo credits
 
-The seed script attaches one locally stored photograph to each product SKU.
+The seed script attaches a locally stored photograph to each product SKU.
 These photos depict the relevant kind of outdoor equipment; they are
 illustrative, not official product photos or endorsements of Prairie Peak.
+Some related catalogue items reuse a photo; it does not depict their exact model.
 Wikimedia Commons photos are resized/re-encoded for the storefront. Their
 attribution and license terms are preserved below. Unsplash photos are free to
 use under the [Unsplash License](https://unsplash.com/license).
@@ -19,7 +20,9 @@ use under the [Unsplash License](https://unsplash.com/license).
 | PCK-001 | `pck-001-hiking-backpack.jpg` | Hiking backpack with trekking gear | SGrabarczuk (WMF) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); [source](https://commons.wikimedia.org/wiki/File:A_backpack_with_trekking_poles_and_shoes.jpg) |
 | PCK-002 | `pck-002-daypack.jpg` | Daypack on a log | Ali Kazal | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/9aZ3T1q83CM) |
 | PCK-003 | `pck-003-rolltop-dry-bag.jpg` | Black roll-top bag | Rendy Risman | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/7FCgzgbtDFI) |
-| FTW-001 | `ftw-001-hiking-boots.jpg` | Brown leather hiking boots | Clay Banks | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/BSL837tTPAw) |
+| FTW-001, FTW-005 | `hiking-boots-wes.jpg` | Leather boots crossing a creek | Wes Hicks | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/person-stepping-on-rock--zqLoHuYkj4) |
+| FTW-003 | `trail-shoe-ajeet.jpg` | Black hiking shoe on a rock | Ajeet Panesar | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/a-black-shoe-on-a-rock-p3rDtB66cws) |
+| FTW-004 | `hiking-shoes-clay.jpg` | Hiking shoes on a trail | Clay Banks | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/person-in-gray-nike-running-shoes-nj0a29qb_jo) |
 | FTW-002 | `ftw-002-winter-boots.jpg` | Boot on snow | Oto Zapletal | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); [source](https://commons.wikimedia.org/wiki/File:Boot_on_snow.jpg) |
 | APP-001 | `app-001-base-layer.jpg` | Long-sleeved hiking layer | Angel Balashev | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/-biZJoTiMEk) |
 | APP-002 | `app-002-shell-jacket.jpg` | Outdoor jacket | Thomas Le | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/HLf8NdGcI0g) |
@@ -33,7 +36,8 @@ use under the [Unsplash License](https://unsplash.com/license).
 | PAD-002 | `pad-002-life-jacket.jpg` | Life vests on a raft | Zack Zaidi | [Unsplash License](https://unsplash.com/license); [photo](https://unsplash.com/photos/L_OHGggGQtA) |
 | PAD-003 | `pad-003-fishing-tackle.jpg` | Fishing lures and spinners | R. Henrik Nilsson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); [source](https://commons.wikimedia.org/wiki/File:4_hooked_fishing_bait_lures_viz_jig_spoonlure_plug_spinnerbait.jpg) |
 
-The original six category-photo files are retained for existing installations
-and test fixtures. The seed script now uses the SKU-specific filenames in this
-table. To refresh existing product attachments after a seed-image change, run
+Additional products reuse the matching equipment photos listed above; their
+individual filenames are recorded in `db/seeds/catalogue.rb`. The original
+category-photo files are retained for existing installations and test fixtures.
+To refresh existing product attachments after a seed-image change, run
 `bin/rails db:seed`.
