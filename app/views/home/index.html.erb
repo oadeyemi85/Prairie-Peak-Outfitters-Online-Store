@@ -1,9 +1,46 @@
 <% content_for :title, "Outdoor gear for the Prairies" %>
-<section class="hero mb-4">
-  <h1>Gear tested on the Prairies</h1>
-  <p class="lead mb-3">Tents, sleeping bags, packs, footwear and more, chosen by Winnipeg's outdoor people since 2011.</p>
-  <%= link_to "Shop all products", products_path, class: "btn btn-warning btn-lg" %>
-</section>
+<% if @hero_slides.any? %>
+  <section id="adventureCarousel" class="carousel slide adventure-carousel mb-5"
+           aria-label="Explore outdoor gear by category">
+    <div class="carousel-inner">
+      <% @hero_slides.each_with_index do |slide, index| %>
+        <div class="carousel-item <%= "active" if index.zero? %>">
+          <%= link_to category_path(slide[:category]), class: "adventure-slide" do %>
+            <%= image_tag "adventure/#{slide[:image]}", class: "adventure-slide-image",
+                          alt: "", loading: index.zero? ? "eager" : "lazy" %>
+            <span class="adventure-slide-content">
+              <span class="adventure-eyebrow">Prairie Peak Outfitters</span>
+              <span class="adventure-title"><%= slide[:title] %></span>
+              <span class="adventure-description"><%= slide[:description] %></span>
+              <span class="adventure-cta">Shop <%= slide[:category].name %> <span aria-hidden="true">&rarr;</span></span>
+            </span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <% if @hero_slides.size > 1 %>
+      <div class="adventure-controls">
+        <button class="adventure-control" type="button" data-bs-target="#adventureCarousel" data-bs-slide="prev"
+                aria-label="Previous slide">&larr;</button>
+        <div class="adventure-indicators" aria-label="Choose slide">
+          <% @hero_slides.each_with_index do |slide, index| %>
+            <button type="button" data-bs-target="#adventureCarousel" data-bs-slide-to="<%= index %>"
+                    class="<%= "active" if index.zero? %>" aria-current="<%= index.zero? %>"
+                    aria-label="Show <%= slide[:category].name %> slide"></button>
+          <% end %>
+        </div>
+        <button class="adventure-control" type="button" data-bs-target="#adventureCarousel" data-bs-slide="next"
+                aria-label="Next slide">&rarr;</button>
+        <button class="adventure-pause" type="button" hidden>Pause slideshow</button>
+      </div>
+    <% end %>
+  </section>
+<% else %>
+  <section class="hero mb-4">
+    <h1>Gear tested on the Prairies</h1>
+    <%= link_to "Shop all products", products_path, class: "btn btn-warning" %>
+  </section>
+<% end %>
 
 <h2 class="h4">New arrivals</h2>
 <%= render "shared/product_grid", products: @new_arrivals %>
