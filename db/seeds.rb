@@ -1,5 +1,7 @@
 # Idempotent seed script: provinces/territories with tax rates, an admin, categories,
-# 23 products with images, and the About/Contact pages.
+# products with images, and the About/Contact pages.
+
+require_relative "seeds/catalogue"
 
 PROVINCES = [
   ["Alberta", "AB", 0.05, 0, 0], ["British Columbia", "BC", 0.05, 0.07, 0],
@@ -100,7 +102,7 @@ PRODUCT_IMAGES = {
   "PCK-001" => "pck-001-hiking-backpack.jpg",
   "PCK-002" => "pck-002-daypack.jpg",
   "PCK-003" => "pck-003-rolltop-dry-bag.jpg",
-  "FTW-001" => "ftw-001-hiking-boots.jpg",
+  "FTW-001" => "hiking-boots-wes.jpg",
   "FTW-002" => "ftw-002-winter-boots.jpg",
   "APP-001" => "app-001-base-layer.jpg",
   "APP-002" => "app-002-shell-jacket.jpg",
@@ -115,12 +117,13 @@ PRODUCT_IMAGES = {
   "PAD-003" => "pad-003-fishing-tackle.jpg"
 }.freeze
 
-PRODUCTS.each_with_index do |(name, sku, cats, price, sale, stock, description), index|
+seed_products = PRODUCTS.map { |product| product + [PRODUCT_IMAGES.fetch(product[1])] } + ADDITIONAL_PRODUCTS
+
+seed_products.each_with_index do |(name, sku, cats, price, sale, stock, description, image_name), index|
   product = Product.find_or_initialize_by(sku: sku)
   product.assign_attributes(name: name, description: description, price: price, sale_price: sale,
                             on_sale: sale.present?, stock_quantity: stock, active: true,
                             categories: cats.map { |c| categories.fetch(c) })
-  image_name = PRODUCT_IMAGES.fetch(sku)
   unless product.image.attached? && product.image.filename.to_s == image_name
     image_path = Rails.root.join("db/seeds/images/#{image_name}")
     File.open(image_path) do |image|
