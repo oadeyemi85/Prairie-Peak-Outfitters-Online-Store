@@ -98,8 +98,10 @@ and are required at checkout.
 
 ## How to use the store
 
-- **Browse:** The home page shows new arrivals, sale items, and categories.
-  Choose a category in the menu to see its products.
+- **Browse:** The home page features six adventure slides linking to categories,
+  plus new arrivals and sale items. Use the arrows, slide selectors, or
+  pause/play button to control the slideshow. Choose a category in the menu
+  to see its products.
 - **Search:** Use the search box in the top navigation. Enter a word and, if
   desired, choose a category. Leave the category blank to search the whole
   catalogue. Results match product names and descriptions.
@@ -125,19 +127,22 @@ and are required at checkout.
 
 ## Sample catalogue
 
-Seeding creates 13 provinces and territories, 6 categories, 23 sample products,
+Seeding creates 13 provinces and territories, 6 categories, 59 sample products
+(at least 10 per category),
 an administrator, and editable About and Contact pages. Product names and
 descriptions are written for this fictional shop; no scraped or third-party
 dataset is required for the assignment's invented-product option. Each product
-has its own locally stored outdoor photo selected to match the item's name and
-type. The images illustrate the product type, not a particular Prairie Peak
-brand or model. Photo creators, source pages, and licenses are listed in
+has a locally stored outdoor photo selected to match the item's type. Some
+related products reuse the same illustrative photo; these do not show exact
+Prairie Peak models. Photo creators, source pages, and licenses are listed in
 [db/seeds/images/README.md](./db/seeds/images/README.md).
 
 Seeding is safe to repeat: it finds existing province, category, product, admin,
 and page records rather than intentionally creating duplicates. About/Contact
-pages edited by staff are not overwritten on later seed runs. After changing or
-adding seed photos, refresh the sample product images with:
+pages edited by staff are not overwritten on later seed runs. Reseeding does
+reset seeded product details, categories, stock and changed image attachments,
+so back up any staff edits to sample products first. To load the expanded
+catalogue and updated sample photos, run:
 
 ```sh
 bin/rails db:seed
@@ -190,6 +195,27 @@ current seed photos to an existing database, run:
 ```sh
 bin/rails db:seed
 ```
+
+### New adventure and hiking photo credits
+
+The following resized photos are used under the
+[Unsplash License](https://unsplash.com/license). Images illustrate outdoor
+equipment and are not endorsements by the photographers or pictured brands.
+
+| Use | Photographer | Original photograph |
+| --- | --- | --- |
+| Footwear and apparel slide | David Cerini | [Woman looking across mountains](https://unsplash.com/photos/a-woman-standing-on-top-of-a-mountain-with-a-backpack-qwyEEBEwQu0) |
+| Packs and bags slide | Alin Gavriliuc | [Hiker with a backpack](https://unsplash.com/photos/a-man-hiking-up-a-mountain-with-a-backpack-J0x5ZqtTUxA) |
+| Tents slide | Miguel Cortes | [Tent in the mountains](https://unsplash.com/photos/a-tent-is-set-up-on-a-mountain-landscape-Mi84slgkTiY) |
+| Sleeping gear slide | Chaewul Kim | [Tent and sleeping bag in the snow](https://unsplash.com/photos/a-tent-with-a-sleeping-bag-in-the-snow-next-to-a-tree-HW3-TXyfMlY) |
+| Cooking slide | Hanna Lazar | [Preparing food on a camping stove](https://unsplash.com/photos/person-preparing-food-on-camping-stove-Gypo3bJGMqw) |
+| Paddling slide | Maxime Doré | [Canoeing in Canada](https://unsplash.com/photos/a-group-of-people-in-canoes-paddling-down-a-river-r9e0EboZguI) |
+| Hiking boots | Wes Hicks | [Boots crossing a creek](https://unsplash.com/photos/person-stepping-on-rock--zqLoHuYkj4) |
+| Black hiking shoe | Ajeet Panesar | [Shoe on a rock](https://unsplash.com/photos/a-black-shoe-on-a-rock-p3rDtB66cws) |
+| Hiking shoes | Clay Banks | [Shoes on a trail](https://unsplash.com/photos/person-in-gray-nike-running-shoes-nj0a29qb_jo) |
+
+The remaining seed-image credits and licenses are in
+[db/seeds/images/README.md](./db/seeds/images/README.md).
 ## Design and record-keeping notes
 
 - Order items save the unit price charged at purchase; orders save the applied
