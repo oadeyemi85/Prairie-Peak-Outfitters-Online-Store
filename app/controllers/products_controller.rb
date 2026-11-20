@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  PER_PAGE = 9
+  PER_PAGE = 12
   FILTERS = { "on_sale" => :on_sale, "new" => :recently_added, "updated" => :recently_updated }.freeze
 
   # Also handles keyword search (2.6): ?q=tent&category_id=3
