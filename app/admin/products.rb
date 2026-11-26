@@ -52,14 +52,21 @@ ActiveAdmin.register Product do
       f.input :name
       f.input :sku
       f.input :description
-      f.input :price
+      f.input :price, min: 0.01, max: 99_999.99, step: 0.01
       f.input :on_sale
       f.input :sale_price
       f.input :stock_quantity
       f.input :active
       f.input :category_ids, as: :check_boxes, collection: Category.order(:name), label: "Categories"
+      image_hint = if f.object.image.attached?
+                     if f.object.image.blob.persisted?
+                       image_tag(f.object.image.variant(:thumb), height: 80)
+                     else
+                       "Please select the image again before submitting."
+                     end
+                   end
       f.input :image, as: :file,
-                      hint: (image_tag(f.object.image.variant(:thumb), height: 80) if f.object.image.attached?)
+                      hint: image_hint
     end
     f.actions
   end
