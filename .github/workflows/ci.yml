@@ -18,8 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
-        with: { bundler-cache: true }
+        with:
+          ruby-version: "3.1.2"
+          bundler-cache: true
       - run: sudo apt-get update && sudo apt-get install -y libvips
       - run: bundle exec rubocop
-      - run: bin/rails db:create db:migrate
-      - run: bin/rails test
+      - run: ruby bin/rails db:create db:migrate
+      - run: ruby bin/rails test
